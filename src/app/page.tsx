@@ -8,8 +8,6 @@ export default function Home() {
     <div>
       <CreateNavBar />
       <MenubarDemo />
-      <CreateDayBar />
-      <CreateWorkoutsSection />
     </div>
   );
 }

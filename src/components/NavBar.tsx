@@ -1,5 +1,4 @@
 "use client";
-
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,7 +16,7 @@ export function CreateNavBar() {
   const [position, setPosition] = React.useState("bottom");
   return (
     <div className="flex flex-row justify-between items-center m-4">
-      <h1>Tracking app</h1>
+      <b className="text-lg">Tracking app</b>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" className="icon">
