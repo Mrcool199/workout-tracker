@@ -12,12 +12,28 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
+import { useState } from "react";
 
 type WorkoutDialogProps = {
-  workoutData: { label: string };
+  label: string;
+  value: string;
+  index: number;
+  editWorkout: (editedLabel: string, editedValue: string) => void;
 };
 
-export function WorkoutDialog({ workoutData: { label } }: WorkoutDialogProps) {
+export function WorkoutDialog({
+  label,
+  value,
+  index,
+  editWorkout,
+}: WorkoutDialogProps) {
+  const [localLabel, setLocalLabel] = useState(label);
+  const [localValue, setLocalValue] = useState(value);
+
+  const handleSaveChanges = () => {
+    editWorkout(localLabel, localValue);
+  };
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -42,15 +58,23 @@ export function WorkoutDialog({ workoutData: { label } }: WorkoutDialogProps) {
               id="name"
               placeholder="Enter exercise"
               className="col-span-3"
+              value={localLabel}
+              onChange={(e) => setLocalLabel(e.target.value)}
             />
           </div>
           <Label htmlFor="username" className="text-left">
             Description:
           </Label>
-          <Textarea placeholder="Type your message here." />
+          <Textarea
+            placeholder="Type your message here."
+            value={localValue}
+            onChange={(e) => setLocalValue(e.target.value)}
+          />
         </div>
         <DialogFooter>
-          <Button type="submit">Save changes</Button>
+          <Button onClick={handleSaveChanges} type="submit">
+            Save changes
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

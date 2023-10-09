@@ -22,6 +22,22 @@ export function WorkoutsSection({ heading }: { heading: string }) {
     setWorkouts([{ label: "New Workout", value: "sda" }, ...workouts]);
   }
 
+  function editWorkout(
+    index: number,
+    editedLabel: string,
+    editedValue: string
+  ) {
+    setWorkouts((prevWorkouts) => {
+      const updatedWorkouts = [...prevWorkouts];
+      updatedWorkouts[index] = {
+        ...updatedWorkouts[index],
+        label: editedLabel,
+        value: editedValue,
+      };
+      return updatedWorkouts;
+    });
+  }
+
   return (
     <div className="flex flex-col md:flex-row justify-between gap-2">
       <div className="flex flex-row justify-between items-center m-4">
@@ -31,7 +47,15 @@ export function WorkoutsSection({ heading }: { heading: string }) {
         </Button>
       </div>
       {workouts.map((element, i) => (
-        <WorkoutDialog key={i} workoutData={{ label: element.label }} />
+        <WorkoutDialog
+          key={i}
+          label={element.label}
+          value={element.value}
+          index={i}
+          editWorkout={(editedLabel, editedValue) =>
+            editWorkout(i, editedLabel, editedValue)
+          }
+        />
       ))}
     </div>
   );
