@@ -1,4 +1,5 @@
 "use client";
+
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -13,7 +14,7 @@ import {
 import { MenuIcon } from "lucide-react";
 
 export function CreateNavBar() {
-  const [position, setPosition] = React.useState("bottom");
+  const [position, setPosition] = React.useState("Monday");
   return (
     <div className="flex flex-row justify-between items-center m-4">
       <b className="text-lg">Tracking app</b>

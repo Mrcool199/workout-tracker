@@ -1,8 +1,5 @@
-"use client";
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { CreateDayBar } from "./DayBar";
-import { CreateWorkoutsSection } from "./WorkoutsSection";
+import { WorkoutsSection } from "./WorkoutsSection";
 
 export function MenubarDemo() {
   return (
@@ -13,12 +10,15 @@ export function MenubarDemo() {
         <TabsTrigger value="tomorrow">tomorrow</TabsTrigger>
       </TabsList>
 
-      <TabsContent value="yesterday"></TabsContent>
-      <TabsContent value="today">
-        <CreateDayBar />
-        <CreateWorkoutsSection />
+      <TabsContent value="yesterday">
+        <WorkoutsSection heading="Sunday" />
       </TabsContent>
-      <TabsContent value="tomorrow"></TabsContent>
+      <TabsContent value="today">
+        <WorkoutsSection heading="Monday" />
+      </TabsContent>
+      <TabsContent value="tomorrow">
+        <WorkoutsSection heading="Tuesday" />
+      </TabsContent>
     </Tabs>
   );
 }
