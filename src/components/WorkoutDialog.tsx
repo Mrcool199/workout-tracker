@@ -18,7 +18,11 @@ type WorkoutDialogProps = {
   label: string;
   value: string;
   index: number;
-  editWorkout: (editedLabel: string, editedValue: string) => void;
+  editWorkout: (
+    index: number,
+    editedLabel: string,
+    editedValue: string
+  ) => void;
 };
 
 export function WorkoutDialog({
@@ -32,15 +36,18 @@ export function WorkoutDialog({
   const [isOpen, setIsOpen] = useState(false);
 
   const handleSaveChanges = () => {
-    editWorkout(localLabel, localValue);
+    editWorkout(index, localLabel, localValue);
     setIsOpen(false);
   };
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="secondary" className="justify-between border-b-2">
-          <span>{label}</span>
+        <Button
+          variant="secondary"
+          className="w-full justify-between border-b-2"
+        >
+          <span>{localLabel}</span>
           <Edit3Icon />
         </Button>
       </DialogTrigger>
