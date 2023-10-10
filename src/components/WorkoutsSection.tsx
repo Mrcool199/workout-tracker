@@ -13,8 +13,8 @@ type WorkoutTask = {
 export function WorkoutsSection({ heading }: { heading: string }) {
   const [workouts, setWorkouts] = useState<WorkoutTask[]>([
     {
-      label: "New Workout",
-      value: "icon",
+      label: "",
+      value: "",
     },
   ]);
 

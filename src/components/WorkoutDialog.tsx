@@ -29,13 +29,15 @@ export function WorkoutDialog({
 }: WorkoutDialogProps) {
   const [localLabel, setLocalLabel] = useState(label);
   const [localValue, setLocalValue] = useState(value);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleSaveChanges = () => {
     editWorkout(localLabel, localValue);
+    setIsOpen(false);
   };
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button variant="secondary" className="justify-between border-b-2">
           <span>{label}</span>
@@ -55,8 +57,8 @@ export function WorkoutDialog({
               Exercise:
             </Label>
             <Input
+              placeholder="New Workout"
               id="name"
-              placeholder="Enter exercise"
               className="col-span-3"
               value={localLabel}
               onChange={(e) => setLocalLabel(e.target.value)}
@@ -66,7 +68,7 @@ export function WorkoutDialog({
             Description:
           </Label>
           <Textarea
-            placeholder="Type your message here."
+            placeholder="Enter description"
             value={localValue}
             onChange={(e) => setLocalValue(e.target.value)}
           />
