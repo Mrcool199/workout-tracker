@@ -6,15 +6,12 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuLabel,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MenuIcon } from "lucide-react";
 
 export function CreateNavBar() {
-  const [position, setPosition] = React.useState("Monday");
   return (
     <div className="flex flex-row justify-between items-center m-4">
       <b className="text-lg">Tracking app</b>
@@ -25,25 +22,12 @@ export function CreateNavBar() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
-          <DropdownMenuLabel>Day of the week</DropdownMenuLabel>
+          <DropdownMenuLabel>Menu</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuRadioGroup value={position} onValueChange={setPosition}>
-            <DropdownMenuRadioItem value="Monday">Monday</DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="Tuesday">
-              Tuesday
-            </DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="Wednesday">
-              Wednesday
-            </DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="Thursday">
-              Thursday
-            </DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="Friday">Friday</DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="Saturday">
-              Saturday
-            </DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="Sunday">Sunday</DropdownMenuRadioItem>
-          </DropdownMenuRadioGroup>
+          <div className="flex flex-col gap-2 m-4">
+            <Button variant="default">Add Exercise</Button>
+            <Button variant="destructive">Sign out</Button>
+          </div>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

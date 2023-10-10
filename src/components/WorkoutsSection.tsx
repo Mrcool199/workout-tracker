@@ -4,6 +4,7 @@ import { useState } from "react";
 import { WorkoutDialog } from "./WorkoutDialog";
 import { Button } from "./ui/button";
 import { Plus } from "lucide-react";
+import { PopUp } from "./Popup";
 
 type WorkoutTask = {
   label: string;
@@ -11,15 +12,10 @@ type WorkoutTask = {
 };
 
 export function WorkoutsSection({ heading }: { heading: string }) {
-  const [workouts, setWorkouts] = useState<WorkoutTask[]>([
-    {
-      label: "New Workout",
-      value: "",
-    },
-  ]);
+  const [workouts, setWorkouts] = useState<WorkoutTask[]>([]);
 
   function addWorkout() {
-    setWorkouts([{ label: "New Workout", value: "" }, ...workouts]);
+    setWorkouts([{ label: "", value: "" }, ...workouts]);
   }
 
   function editWorkout(
@@ -47,7 +43,7 @@ export function WorkoutsSection({ heading }: { heading: string }) {
       <div className="flex flex-col gap-1">
         {workouts.map((element, i) => (
           <div key={i}>
-            <p className="ml-4 text-gray-500 text-xs">Starting point</p>
+            <PopUp label={element.label} value={element.value} index={i} />
             <WorkoutDialog
               label={element.label}
               value={element.value}

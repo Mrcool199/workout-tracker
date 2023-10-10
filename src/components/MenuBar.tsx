@@ -3,21 +3,25 @@ import { WorkoutsSection } from "./WorkoutsSection";
 
 export function MenubarDemo() {
   return (
-    <Tabs defaultValue="account">
+    <Tabs defaultValue="chest">
       <TabsList className="flex flex-row justify-between">
-        <TabsTrigger value="yesterday">yesterday</TabsTrigger>
-        <TabsTrigger value="today">today</TabsTrigger>
-        <TabsTrigger value="tomorrow">tomorrow</TabsTrigger>
+        <TabsTrigger value="chest">Chest</TabsTrigger>
+        <TabsTrigger value="legs">Legs</TabsTrigger>
+        <TabsTrigger value="arms">Arms</TabsTrigger>
+        <TabsTrigger value="back">Back</TabsTrigger>
       </TabsList>
 
-      <TabsContent value="yesterday">
-        <WorkoutsSection heading="Sunday" />
+      <TabsContent value="chest">
+        <WorkoutsSection heading="Chest" />
       </TabsContent>
-      <TabsContent value="today">
-        <WorkoutsSection heading="Monday" />
+      <TabsContent value="legs">
+        <WorkoutsSection heading="Legs" />
       </TabsContent>
-      <TabsContent value="tomorrow">
-        <WorkoutsSection heading="Tuesday" />
+      <TabsContent value="arms">
+        <WorkoutsSection heading="Arms" />
+      </TabsContent>
+      <TabsContent value="back">
+        <WorkoutsSection heading="Back" />
       </TabsContent>
     </Tabs>
   );
