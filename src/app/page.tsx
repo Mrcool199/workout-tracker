@@ -1,5 +1,5 @@
-import { MenubarDemo } from "@/components/MenuBar";
-import { CreateNavBar } from "@/components/NavBar";
+import { MenubarDemo } from "@/components/NavBar";
+import { CreateNavBar } from "@/components/MenuButton";
 
 export default function Home() {
   return (

@@ -6,6 +6,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Textarea } from "./ui/textarea";
 
 export function PopUp({
   label,
@@ -31,13 +32,13 @@ export function PopUp({
           </div>
           <div className="grid gap-2">
             <div className="flex flex-col justify-between gap-4">
-              <div className="grid grid-cols">
-                <Label htmlFor="width">Exercise</Label>
-                <p>{label}</p>
+              <div className="flex flex-row gap-10">
+                <Label htmlFor="width">Exercise:</Label>
+                <Label>{label}</Label>
               </div>
-              <div className="grid grid-cols">
+              <div className="flex flex-row gap-6">
                 <Label htmlFor="width">Description</Label>
-                <p>{value}</p>
+                <Label>{value}</Label>
               </div>
             </div>
           </div>

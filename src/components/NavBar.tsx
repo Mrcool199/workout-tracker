@@ -1,35 +1,28 @@
-"use client";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { WorkoutsSection } from "./WorkoutsSection";
 
-import * as React from "react";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { MenuIcon } from "lucide-react";
-
-export function CreateNavBar() {
+export function MenubarDemo() {
   return (
-    <div className="flex flex-row justify-between items-center m-4">
-      <b className="text-lg">Tracking app</b>
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="icon">
-            <MenuIcon className="h-4 w-4" />
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56">
-          <DropdownMenuLabel>Menu</DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <div className="flex flex-col gap-2 m-4">
-            <Button variant="default">Add Exercise</Button>
-            <Button variant="destructive">Sign out</Button>
-          </div>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </div>
+    <Tabs defaultValue="chest">
+      <TabsList className="flex flex-row justify-between">
+        <TabsTrigger value="chest">Chest</TabsTrigger>
+        <TabsTrigger value="legs">Legs</TabsTrigger>
+        <TabsTrigger value="arms">Arms</TabsTrigger>
+        <TabsTrigger value="back">Back</TabsTrigger>
+      </TabsList>
+
+      <TabsContent value="chest">
+        <WorkoutsSection heading="Chest" />
+      </TabsContent>
+      <TabsContent value="legs">
+        <WorkoutsSection heading="Legs" />
+      </TabsContent>
+      <TabsContent value="arms">
+        <WorkoutsSection heading="Arms" />
+      </TabsContent>
+      <TabsContent value="back">
+        <WorkoutsSection heading="Back" />
+      </TabsContent>
+    </Tabs>
   );
 }

@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { Textarea } from "@/components/ui/textarea";
 import { useState } from "react";
+import { PopUp } from "./Popup";
 
 type WorkoutDialogProps = {
   label: string;
@@ -41,51 +42,54 @@ export function WorkoutDialog({
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button
-          variant="secondary"
-          className="w-full justify-between border-b-2"
-        >
-          <span>{localLabel}</span>
-          <Edit3Icon />
-        </Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
-        <DialogHeader>
-          <DialogTitle>Edit Exercise</DialogTitle>
-          <DialogDescription>
-            Click save when you&apos;re done.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-left">
-              Exercise:
+    <>
+      <PopUp label={localLabel} value={localValue} index={index} />
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogTrigger asChild>
+          <Button
+            variant="secondary"
+            className="w-full justify-between border-b-2"
+          >
+            <span>{localLabel}</span>
+            <Edit3Icon />
+          </Button>
+        </DialogTrigger>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Edit Exercise</DialogTitle>
+            <DialogDescription>
+              Click save when you&apos;re done.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="name" className="text-left">
+                Exercise:
+              </Label>
+              <Input
+                placeholder="New Workout"
+                id="name"
+                className="col-span-3"
+                value={localLabel}
+                onChange={(e) => setLocalLabel(e.target.value)}
+              />
+            </div>
+            <Label htmlFor="username" className="text-left">
+              Description:
             </Label>
-            <Input
-              placeholder="New Workout"
-              id="name"
-              className="col-span-3"
-              value={localLabel}
-              onChange={(e) => setLocalLabel(e.target.value)}
+            <Textarea
+              placeholder="Enter description"
+              value={localValue}
+              onChange={(e) => setLocalValue(e.target.value)}
             />
           </div>
-          <Label htmlFor="username" className="text-left">
-            Description:
-          </Label>
-          <Textarea
-            placeholder="Enter description"
-            value={localValue}
-            onChange={(e) => setLocalValue(e.target.value)}
-          />
-        </div>
-        <DialogFooter>
-          <Button onClick={handleSaveChanges} type="submit">
-            Save changes
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+          <DialogFooter>
+            <Button onClick={handleSaveChanges} type="submit">
+              Save changes
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }
