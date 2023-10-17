@@ -14,7 +14,7 @@ export function WorkoutsSection({ heading }: { heading: string }) {
   const [workouts, setWorkouts] = useState<WorkoutTask[]>([]);
 
   function addWorkout() {
-    setWorkouts([{ label: "", value: "" }, ...workouts]);
+    setWorkouts([...workouts, { label: "", value: "" }]);
   }
 
   function editWorkout(
@@ -22,13 +22,12 @@ export function WorkoutsSection({ heading }: { heading: string }) {
     editedLabel: string,
     editedValue: string
   ) {
-    setWorkouts((prevWorkouts) => {
-      const updatedWorkouts = [...prevWorkouts];
-      updatedWorkouts[index] = {
-        ...updatedWorkouts[index],
-      };
-      return updatedWorkouts;
-    });
+    workouts[index] = { label: editedLabel, value: editedValue };
+    setWorkouts([...workouts]);
+  }
+  function deleteWorkout(index: number) {
+    workouts.splice(index, 1);
+    setWorkouts([...workouts]);
   }
 
   return (
@@ -41,16 +40,14 @@ export function WorkoutsSection({ heading }: { heading: string }) {
       </div>
       <div className="flex flex-col gap-1">
         {workouts.map((element, i) => (
-          <div key={i}>
-            <WorkoutDialog
-              label={element.label}
-              value={element.value}
-              index={i}
-              editWorkout={(i, editedLabel, editedValue) =>
-                editWorkout(i, editedLabel, editedValue)
-              }
-            />
-          </div>
+          <WorkoutDialog
+            key={i}
+            label={element.label}
+            value={element.value}
+            index={i}
+            editWorkout={editWorkout}
+            deleteWorkout={deleteWorkout}
+          />
         ))}
       </div>
     </div>
