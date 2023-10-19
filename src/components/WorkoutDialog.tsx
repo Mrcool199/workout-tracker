@@ -38,7 +38,6 @@ export function WorkoutDialog({
   const [localValue, setLocalValue] = useState(value);
   const [isOpen, setIsOpen] = useState(false);
 
-  // Update localLabel and localValue when props change
   useEffect(() => {
     setLocalLabel(label);
     setLocalValue(value);
@@ -61,7 +60,7 @@ export function WorkoutDialog({
         <DialogTrigger asChild>
           <Button
             variant="secondary"
-            className="w-full justify-between border-b-2"
+            className="justify-between border-b-2 mx-2"
           >
             <span>{localLabel}</span>
             <Edit3Icon />

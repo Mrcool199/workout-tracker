@@ -4,7 +4,7 @@ import { WorkoutsSection } from "./WorkoutsSection";
 export function MenubarDemo() {
   return (
     <Tabs defaultValue="chest">
-      <TabsList className="flex flex-row justify-between">
+      <TabsList className="  flex flex-row justify-between shadow mb-4">
         <TabsTrigger value="chest">Chest</TabsTrigger>
         <TabsTrigger value="legs">Legs</TabsTrigger>
         <TabsTrigger value="arms">Arms</TabsTrigger>

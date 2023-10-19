@@ -14,18 +14,20 @@ import { MenuIcon } from "lucide-react";
 export function CreateNavBar() {
   return (
     <div className="flex flex-row justify-between items-center m-4">
-      <b className="text-lg">Tracking app</b>
+      <b className="text-xl font-sans shadow-sm p-1 text-red-500">
+        Workout
+        <span className="text-black">Tracker</span>
+      </b>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="icon">
-            <MenuIcon className="h-4 w-4" />
+          <Button variant="outline" className="icon shadow w-10 h-10 p-0">
+            <MenuIcon />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
           <DropdownMenuLabel>Menu</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <div className="flex flex-col gap-2 m-4">
-            <Button variant="default">Add Exercise</Button>
             <Button variant="destructive">Sign out</Button>
           </div>
         </DropdownMenuContent>

@@ -33,7 +33,7 @@ export function WorkoutsSection({ heading }: { heading: string }) {
   return (
     <div className="flex flex-col justify-between gap-2">
       <div className="flex flex-row justify-between items-center mx-4">
-        <b className="text-gray-700">{heading}</b>
+        <b className="text-lg shadow-sm">{heading}</b>
         <Button onClick={addWorkout} variant="ghost" size="icon">
           <Plus className="h-6 w-6" />
         </Button>
