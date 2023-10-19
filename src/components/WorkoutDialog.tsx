@@ -18,6 +18,7 @@ import { PopUp } from "./Popup";
 type WorkoutDialogProps = {
   label: string;
   value: string;
+  firstDescription: string;
   index: number;
   editWorkout: (
     index: number,
@@ -30,18 +31,21 @@ type WorkoutDialogProps = {
 export function WorkoutDialog({
   label,
   value,
+  firstDescription,
   index,
   editWorkout,
   deleteWorkout,
 }: WorkoutDialogProps) {
   const [localLabel, setLocalLabel] = useState(label);
   const [localValue, setLocalValue] = useState(value);
+  const [localFirstDescription, setLocalFirstDescription] = useState(value);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     setLocalLabel(label);
     setLocalValue(value);
-  }, [label, value]);
+    setLocalFirstDescription(firstDescription);
+  }, [label, value, firstDescription]);
 
   const handleSaveChanges = () => {
     editWorkout(index, localLabel, localValue);
@@ -59,6 +63,7 @@ export function WorkoutDialog({
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
           <Button
+            {...[localFirstDescription]}
             variant="secondary"
             className="justify-between border-b-2 mx-2"
           >

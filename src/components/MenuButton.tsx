@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { MenuIcon } from "lucide-react";
 
-export function CreateNavBar() {
+export function MenuButton() {
   return (
     <div className="flex flex-row justify-between items-center m-4">
       <b className="text-xl font-sans shadow-sm p-1 text-red-500">

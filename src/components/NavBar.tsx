@@ -1,7 +1,9 @@
+"use client";
+
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { WorkoutsSection } from "./WorkoutsSection";
 
-export function MenubarDemo() {
+export function NavBar({ firstDescription }: { firstDescription: string }) {
   return (
     <Tabs defaultValue="chest">
       <TabsList className="  flex flex-row justify-between shadow mb-4">
@@ -12,16 +14,16 @@ export function MenubarDemo() {
       </TabsList>
 
       <TabsContent value="chest">
-        <WorkoutsSection heading="Chest" />
+        <WorkoutsSection firstDescription={firstDescription} heading="Chest" />
       </TabsContent>
       <TabsContent value="legs">
-        <WorkoutsSection heading="Legs" />
+        <WorkoutsSection firstDescription={firstDescription} heading="Legs" />
       </TabsContent>
       <TabsContent value="arms">
-        <WorkoutsSection heading="Arms" />
+        <WorkoutsSection firstDescription={firstDescription} heading="Arms" />
       </TabsContent>
       <TabsContent value="back">
-        <WorkoutsSection heading="Back" />
+        <WorkoutsSection firstDescription={firstDescription} heading="Back" />
       </TabsContent>
     </Tabs>
   );

@@ -10,7 +10,13 @@ type WorkoutTask = {
   value: string;
 };
 
-export function WorkoutsSection({ heading }: { heading: string }) {
+export function WorkoutsSection({
+  firstDescription,
+  heading,
+}: {
+  firstDescription: string;
+  heading: string;
+}) {
   const [workouts, setWorkouts] = useState<WorkoutTask[]>([]);
 
   function addWorkout() {
@@ -44,6 +50,7 @@ export function WorkoutsSection({ heading }: { heading: string }) {
             key={i}
             label={element.label}
             value={element.value}
+            firstDescription={firstDescription}
             index={i}
             editWorkout={editWorkout}
             deleteWorkout={deleteWorkout}
