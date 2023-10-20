@@ -1,31 +1,31 @@
-"use client";
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { WorkoutsSection } from "./WorkoutsSection";
-import { Workout } from "@/lib/db/schema/workout";
+import { getWorkouts } from "@/lib/api/workout/queries";
 
-export function NavBar({ workouts }: { workouts: Workout[] }) {
+const muscleGroups = ["Chest", "Legs", "Arms", "Back", "Shoulders"];
+
+export async function NavBar() {
+  const { workouts: allWorkouts } = await getWorkouts();
   return (
     <Tabs defaultValue="chest">
       <TabsList className="  flex flex-row justify-between shadow mb-4">
-        <TabsTrigger value="chest">Chest</TabsTrigger>
-        <TabsTrigger value="legs">Legs</TabsTrigger>
-        <TabsTrigger value="arms">Arms</TabsTrigger>
-        <TabsTrigger value="back">Back</TabsTrigger>
+        {muscleGroups.map((muscle, i) => (
+          <TabsTrigger key={i} value={muscle}>
+            {muscle}
+          </TabsTrigger>
+        ))}
       </TabsList>
 
-      <TabsContent value="chest">
-        <WorkoutsSection workouts={workouts} heading="Chest" />
-      </TabsContent>
-      <TabsContent value="legs">
-        <WorkoutsSection workouts={workouts} heading="Legs" />
-      </TabsContent>
-      <TabsContent value="arms">
-        <WorkoutsSection workouts={workouts} heading="Arms" />
-      </TabsContent>
-      <TabsContent value="back">
-        <WorkoutsSection workouts={workouts} heading="Back" />
-      </TabsContent>
+      {muscleGroups.map((muscle, i) => (
+        <TabsContent key={i} value={muscle}>
+          <WorkoutsSection
+            workouts={allWorkouts.filter(
+              (workout) => workout.muscleGroup === muscle
+            )}
+            heading={muscle}
+          />
+        </TabsContent>
+      ))}
     </Tabs>
   );
 }
