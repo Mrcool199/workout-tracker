@@ -5,7 +5,7 @@ import { sqliteTable, integer, text } from "drizzle-orm/sqlite-core";
 export const workouts = sqliteTable("workout", {
   id: integer("id").primaryKey(),
   firstWorkout: text("firstWorkout").notNull(),
-  firstDesciption: text("firstDesciption").notNull(),
+  firstDescription: text("firstDescription").notNull(),
   lastWorkout: text("lastWorkout").notNull(),
   lastDescription: text("lastDescription").notNull(),
   muscleGroup: text("muscleGroup").notNull(),

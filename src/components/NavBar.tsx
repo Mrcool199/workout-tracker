@@ -2,8 +2,9 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { WorkoutsSection } from "./WorkoutsSection";
+import { Workout } from "@/lib/db/schema/workout";
 
-export function NavBar({ firstDescription }: { firstDescription: string }) {
+export function NavBar({ workouts }: { workouts: Workout[] }) {
   return (
     <Tabs defaultValue="chest">
       <TabsList className="  flex flex-row justify-between shadow mb-4">
@@ -14,16 +15,16 @@ export function NavBar({ firstDescription }: { firstDescription: string }) {
       </TabsList>
 
       <TabsContent value="chest">
-        <WorkoutsSection firstDescription={firstDescription} heading="Chest" />
+        <WorkoutsSection workouts={workouts} heading="Chest" />
       </TabsContent>
       <TabsContent value="legs">
-        <WorkoutsSection firstDescription={firstDescription} heading="Legs" />
+        <WorkoutsSection workouts={workouts} heading="Legs" />
       </TabsContent>
       <TabsContent value="arms">
-        <WorkoutsSection firstDescription={firstDescription} heading="Arms" />
+        <WorkoutsSection workouts={workouts} heading="Arms" />
       </TabsContent>
       <TabsContent value="back">
-        <WorkoutsSection firstDescription={firstDescription} heading="Back" />
+        <WorkoutsSection workouts={workouts} heading="Back" />
       </TabsContent>
     </Tabs>
   );

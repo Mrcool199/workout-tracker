@@ -6,16 +6,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Workout } from "@/lib/db/schema/workout";
 
-export function PopUp({
-  label,
-  value,
-  index,
-}: {
-  label: string;
-  value: string;
-  index: number;
-}) {
+export function PopUp({ workout }: { workout: Workout }) {
   return (
     <Popover>
       <PopoverTrigger asChild>
@@ -33,11 +26,11 @@ export function PopUp({
             <div className="flex flex-col justify-between gap-4">
               <div className="flex flex-row gap-10">
                 <Label htmlFor="width">Exercise:</Label>
-                <Label>{label}</Label>
+                <Label>{workout.lastWorkout}</Label>
               </div>
               <div className="flex flex-row gap-6">
                 <Label htmlFor="width">Description</Label>
-                <Label>{value}</Label>
+                <Label>{workout.lastDescription}</Label>
               </div>
             </div>
           </div>

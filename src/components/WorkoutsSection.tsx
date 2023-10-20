@@ -4,36 +4,52 @@ import { useState } from "react";
 import { WorkoutDialog } from "./WorkoutDialog";
 import { Button } from "./ui/button";
 import { Plus } from "lucide-react";
-
-type WorkoutTask = {
-  label: string;
-  value: string;
-};
+import { createWorkout, updateWorkout } from "@/lib/api/workout/mutations";
+import { useRouter } from "next/navigation";
+import { Workout, workouts } from "@/lib/db/schema/workout";
 
 export function WorkoutsSection({
-  firstDescription,
+  workouts,
   heading,
 }: {
-  firstDescription: string;
+  workouts: Workout[];
   heading: string;
 }) {
-  const [workouts, setWorkouts] = useState<WorkoutTask[]>([]);
+  const { refresh: refreshPage } = useRouter();
 
-  function addWorkout() {
-    setWorkouts([...workouts, { label: "", value: "" }]);
+  async function addWorkout() {
+    const { error } = await createWorkout({
+      firstWorkout: "",
+      firstDescription: "",
+      lastWorkout: "",
+      lastDescription: "",
+      muscleGroup: heading,
+    });
+
+    if (error) {
+      alert(`an error occured: ${error}`);
+      return;
+    }
+
+    refreshPage();
   }
 
-  function editWorkout(
-    index: number,
-    editedLabel: string,
-    editedValue: string
-  ) {
-    workouts[index] = { label: editedLabel, value: editedValue };
-    setWorkouts([...workouts]);
+  async function editWorkout(workout: Workout) {
+    const { error } = await updateWorkout(workout.id, workout);
+
+    if (error) {
+      alert(`an error occured: ${error}`);
+      return;
+    }
+
+    refreshPage();
+
+    // workouts[index] = { label: editedLabel, value: editedValue };
+    // setWorkouts([...workouts]);
   }
   function deleteWorkout(index: number) {
     workouts.splice(index, 1);
-    setWorkouts([...workouts]);
+    // setWorkouts([...workouts]);
   }
 
   return (
@@ -45,13 +61,11 @@ export function WorkoutsSection({
         </Button>
       </div>
       <div className="flex flex-col gap-1">
-        {workouts.map((element, i) => (
+        {/* for workout in workouts */}
+        {workouts.map((workout) => (
           <WorkoutDialog
-            key={i}
-            label={element.label}
-            value={element.value}
-            firstDescription={firstDescription}
-            index={i}
+            key={workout.id}
+            workout={workout}
             editWorkout={editWorkout}
             deleteWorkout={deleteWorkout}
           />

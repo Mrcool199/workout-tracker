@@ -14,66 +14,52 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useState, useEffect } from "react";
 import { PopUp } from "./Popup";
+import { Workout } from "@/lib/db/schema/workout";
 
 type WorkoutDialogProps = {
-  label: string;
-  value: string;
-  firstDescription: string;
-  index: number;
-  editWorkout: (
-    index: number,
-    editedLabel: string,
-    editedValue: string
-  ) => void;
+  workout: Workout;
+  editWorkout: (workoutLabels: Workout) => void;
   deleteWorkout: (index: number) => void;
 };
 
 export function WorkoutDialog({
-  label,
-  value,
-  firstDescription,
-  index,
+  workout,
   editWorkout,
   deleteWorkout,
 }: WorkoutDialogProps) {
-  const [localLabel, setLocalLabel] = useState(label);
-  const [localValue, setLocalValue] = useState(value);
-  const [localFirstDescription, setLocalFirstDescription] = useState(value);
+  const [workoutLabels, setLocalLabel] = useState(workout);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    setLocalLabel(label);
-    setLocalValue(value);
-    setLocalFirstDescription(firstDescription);
-  }, [label, value, firstDescription]);
+    setLocalLabel(workout);
+  }, [workout]);
 
   const handleSaveChanges = () => {
-    editWorkout(index, localLabel, localValue);
+    editWorkout(workoutLabels);
     setIsOpen(false);
   };
 
   const handleDelete = () => {
-    deleteWorkout(index);
+    deleteWorkout(workout.id);
     setIsOpen(false);
   };
 
   return (
     <>
-      <PopUp label={localLabel} value={localValue} index={index} />
+      <PopUp workout={workout} />
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogTrigger asChild>
           <Button
-            {...[localFirstDescription]}
             variant="secondary"
             className="justify-between border-b-2 mx-2"
           >
-            <span>{localLabel}</span>
+            <span>{workout.lastWorkout}</span>
             <Edit3Icon />
           </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Edit Exercise </DialogTitle>
+            <DialogTitle>Edit Exercise</DialogTitle>
             <DialogDescription>
               Click save when you&apos;re done.
             </DialogDescription>
@@ -85,16 +71,23 @@ export function WorkoutDialog({
             <Input
               placeholder="New Workout"
               className="col-span-3 "
-              value={localLabel}
-              onChange={(e) => setLocalLabel(e.target.value)}
+              value={workout.lastWorkout}
+              onChange={(e) =>
+                setLocalLabel({ ...workoutLabels, lastWorkout: e.target.value })
+              }
             />
             <Label htmlFor="username" className="text-left">
               Description:
             </Label>
             <Textarea
               placeholder="Enter description"
-              value={localValue}
-              onChange={(e) => setLocalValue(e.target.value)}
+              value={workout.lastDescription}
+              onChange={(e) =>
+                setLocalLabel({
+                  ...workoutLabels,
+                  lastDescription: e.target.value,
+                })
+              }
             />
           </div>
           <DialogFooter className="flex flex-col gap-2">

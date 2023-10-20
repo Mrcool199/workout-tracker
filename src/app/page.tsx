@@ -5,16 +5,14 @@ import { getWorkouts } from "@/lib/api/workout/queries";
 export default async function Home() {
   const { workouts } = await getWorkouts();
 
-  console.log(workouts);
-
   const firstDescription =
-    workouts.find((workouts) => workouts.id === 1)?.firstDesciption ||
+    workouts.find((workouts) => workouts.id === 1)?.firstDescription ||
     "Not found";
 
   return (
     <div>
       <MenuButton />
-      <NavBar firstDescription={firstDescription} />
+      <NavBar workouts={workouts} />
     </div>
   );
 }
