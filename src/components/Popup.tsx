@@ -19,18 +19,18 @@ export function PopUp({ workout }: { workout: Workout }) {
           <div className="space-y-2">
             <h4 className="font-medium leading-none">First Entry :</h4>
             <p className="text-sm text-muted-foreground">
-              Set the dimensions for the layer.
+              Well done you have come far !
             </p>
           </div>
           <div className="grid gap-2">
             <div className="flex flex-col justify-between gap-4">
               <div className="flex flex-row gap-10">
                 <Label htmlFor="width">Exercise:</Label>
-                <Label>{workout.lastWorkout}</Label>
+                <Label>{workout.firstWorkout}</Label>
               </div>
               <div className="flex flex-row gap-6">
                 <Label htmlFor="width">Description</Label>
-                <Label>{workout.lastDescription}</Label>
+                <Label>{workout.firstDescription}</Label>
               </div>
             </div>
           </div>

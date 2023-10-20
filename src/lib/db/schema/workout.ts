@@ -11,11 +11,21 @@ export const workouts = sqliteTable("workout", {
   muscleGroup: text("muscleGroup").notNull(),
 });
 // Schema for CRUD - used to validate API requests
-export const insertWorkoutSchema = createInsertSchema(workouts);
+export const insertWorkoutSchema = createInsertSchema(workouts).omit({ 
+  lastDescription: true, 
+  lastWorkout: true,
+  id: true
+});
+
+export const updateWorkoutSchema = z.object({
+  lastWorkout: z.string(),
+  lastDescription: z.string()
+})
+
 export const selectWorkoutSchema = createSelectSchema(workouts);
 export const workoutIdSchema = selectWorkoutSchema.pick({ id: true });
-export const updateWorkoutSchema = selectWorkoutSchema;
 
 export type Workout = z.infer<typeof selectWorkoutSchema>;
 export type NewWorkout = z.infer<typeof insertWorkoutSchema>;
 export type WorkoutId = z.infer<typeof workoutIdSchema>["id"];
+export type UpdateWorkout = z.infer<typeof updateWorkoutSchema>;

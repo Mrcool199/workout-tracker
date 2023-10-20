@@ -1,12 +1,33 @@
 "use client";
 
-import { useState } from "react";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
 import { WorkoutDialog } from "./WorkoutDialog";
 import { Button } from "./ui/button";
 import { Plus } from "lucide-react";
-import { createWorkout, updateWorkout } from "@/lib/api/workout/mutations";
+import {
+  createWorkout,
+  updateWorkout,
+  deleteWorkout,
+} from "@/lib/api/workout/mutations";
 import { useRouter } from "next/navigation";
-import { Workout, workouts } from "@/lib/db/schema/workout";
+import { UpdateWorkout, Workout } from "@/lib/db/schema/workout";
+import { useState } from "react";
+
+const initialWorkout = {
+  description: "",
+  workout: "",
+  id: -1,
+} as const;
 
 export function WorkoutsSection({
   workouts,
@@ -16,58 +37,148 @@ export function WorkoutsSection({
   heading: string;
 }) {
   const { refresh: refreshPage } = useRouter();
+  const [isOpen, setIsOpen] = useState(false);
+  const [dialogWorkout, setDialogWorkout] = useState<{
+    id: Workout["id"];
+    workout: string;
+    description: string;
+  }>(initialWorkout);
 
-  async function addWorkout() {
-    const { error } = await createWorkout({
-      firstWorkout: "",
-      firstDescription: "",
-      lastWorkout: "",
-      lastDescription: "",
-      muscleGroup: heading,
+  async function handleDelete(id: Workout["id"]) {
+    const result = await deleteWorkout(id);
+    if (result.error) {
+      alert(`an error occured: ${result.error}`);
+      return;
+    }
+
+    refreshPage();
+    setIsOpen(false);
+  }
+
+  function handleAddWorkout() {
+    setDialogWorkout(initialWorkout);
+    setIsOpen(true);
+  }
+
+  function handleUpdateWorkout(workout: Workout) {
+    setDialogWorkout({
+      workout: workout.lastWorkout,
+      description: workout.lastDescription,
+      id: workout.id,
     });
-
-    if (error) {
-      alert(`an error occured: ${error}`);
-      return;
-    }
-
-    refreshPage();
+    setIsOpen(true);
   }
 
-  async function editWorkout(workout: Workout) {
-    const { error } = await updateWorkout(workout.id, workout);
+  async function handleSaveChanges() {
+    if (dialogWorkout.id === initialWorkout.id) {
+      const { error } = await createWorkout({
+        firstWorkout: dialogWorkout.workout,
+        firstDescription: dialogWorkout.description,
+        muscleGroup: heading,
+      });
 
-    if (error) {
-      alert(`an error occured: ${error}`);
-      return;
+      if (error) {
+        alert(`an error occured: ${error}`);
+        return;
+      }
+
+      refreshPage();
+    } else {
+      const { error } = await updateWorkout(dialogWorkout.id, {
+        lastDescription: dialogWorkout.description,
+        lastWorkout: dialogWorkout.workout,
+      });
+
+      if (error) {
+        alert(`an error occured: ${error}`);
+        return;
+      }
+
+      refreshPage();
     }
 
-    refreshPage();
-
-    // workouts[index] = { label: editedLabel, value: editedValue };
-    // setWorkouts([...workouts]);
-  }
-  function deleteWorkout(index: number) {
-    workouts.splice(index, 1);
-    // setWorkouts([...workouts]);
+    setIsOpen(false);
   }
 
   return (
     <div className="flex flex-col justify-between gap-2">
+      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>
+              {dialogWorkout.id === initialWorkout.id
+                ? "Add Exercise"
+                : "Edit Workout"}
+            </DialogTitle>
+
+            <DialogDescription>
+              Click save when you&apos;re done.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="flex flex-col gap-4">
+            <Label htmlFor="name" className="text-left">
+              Exercise:
+            </Label>
+            <Input
+              placeholder="New Exercise"
+              className="col-span-3 "
+              value={dialogWorkout.workout}
+              onChange={(e) =>
+                setDialogWorkout({ ...dialogWorkout, workout: e.target.value })
+              }
+            />
+            <Label htmlFor="username" className="text-left">
+              Description:
+            </Label>
+            <Textarea
+              placeholder="Add description ..."
+              value={dialogWorkout.description}
+              onChange={(e) =>
+                setDialogWorkout({
+                  ...dialogWorkout,
+                  description: e.target.value,
+                })
+              }
+            />
+          </div>
+
+          <DialogFooter className="flex flex-col gap-2">
+            <Button
+              onClick={handleSaveChanges}
+              type="submit"
+              className="w-full"
+            >
+              Save changes
+            </Button>
+
+            {dialogWorkout.id !== initialWorkout.id ? (
+              <Button
+                onClick={() => handleDelete(dialogWorkout.id)}
+                variant="destructive"
+                className="w-full"
+              >
+                Delete Workout
+              </Button>
+            ) : null}
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
       <div className="flex flex-row justify-between items-center mx-4">
         <b className="text-lg shadow-sm">{heading}</b>
-        <Button onClick={addWorkout} variant="ghost" size="icon">
+
+        <Button onClick={handleAddWorkout} variant="ghost" size="icon">
           <Plus className="h-6 w-6" />
         </Button>
       </div>
+
       <div className="flex flex-col gap-1">
-        {/* for workout in workouts */}
         {workouts.map((workout) => (
           <WorkoutDialog
             key={workout.id}
             workout={workout}
-            editWorkout={editWorkout}
-            deleteWorkout={deleteWorkout}
+            editWorkout={() => handleUpdateWorkout(workout)}
           />
         ))}
       </div>

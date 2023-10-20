@@ -2,12 +2,18 @@
 
 import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
-import { NewWorkout, insertWorkoutSchema, workouts, workoutIdSchema, WorkoutId } from "@/lib/db/schema/workout";
+import { NewWorkout, insertWorkoutSchema, workouts, workoutIdSchema, WorkoutId, UpdateWorkout } from "@/lib/db/schema/workout";
 
 export const createWorkout = async (workout: NewWorkout) => {
   const newWorkout = insertWorkoutSchema.parse(workout);
   try {
-    const [c] =  await db.insert(workouts).values(newWorkout).returning();
+    const [c] =  await db.insert(workouts).values({
+      firstWorkout: workout.firstWorkout,
+      firstDescription: workout.firstDescription,
+      lastWorkout: workout.firstWorkout,
+      lastDescription: workout.firstDescription,
+      muscleGroup: workout.muscleGroup
+    }).returning();
     return { workout: c }
   } catch (err) {
     const message = (err as Error).message ?? "Error, please try again";
@@ -16,15 +22,13 @@ export const createWorkout = async (workout: NewWorkout) => {
   }
 };
 
-export const updateWorkout = async (id: WorkoutId, workout: NewWorkout) => {
-  const { id: workoutId } = workoutIdSchema.parse({ id });
-  const newWorkout = insertWorkoutSchema.parse(workout);
+export const updateWorkout = async (id: WorkoutId, workout: UpdateWorkout) => {
   try {
-    const [c] = await db
+    const [w] = await db
      .update(workouts)
-     .set(newWorkout)
-     .where(eq(workouts.id, workoutId!)).returning();
-    return { workout: c };
+     .set(workout)
+     .where(eq(workouts.id, id)).returning();
+    return { workout: w };
   } catch (err) {
     const message = (err as Error).message ?? "Error, please try again"
     console.error(message);
