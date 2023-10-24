@@ -1,6 +1,7 @@
 import { createInsertSchema, createSelectSchema } from 'drizzle-zod';
 import { z } from 'zod';
 import { sqliteTable, integer, text } from "drizzle-orm/sqlite-core";
+import { users } from './auth'; // Replace with the actual path
 
 export const workouts = sqliteTable("workout", {
   id: integer("id").primaryKey(),
@@ -10,6 +11,7 @@ export const workouts = sqliteTable("workout", {
   lastDescription: text("lastDescription").notNull(),
   muscleGroup: text("muscleGroup").notNull(),
 });
+
 // Schema for CRUD - used to validate API requests
 export const insertWorkoutSchema = createInsertSchema(workouts).omit({ 
   lastDescription: true, 

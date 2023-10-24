@@ -1,5 +1,3 @@
-"use client";
-
 import * as React from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,9 +7,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MenuIcon } from "lucide-react";
+import { getServerSession } from "next-auth";
+import { authConfig } from "@/lib/auth";
+import { SignOutButton } from "./SignOutButton";
 
-export function MenuButton() {
+export async function MenuButton() {
+  const session = await getServerSession(authConfig);
+
   return (
     <div className="flex flex-row justify-between items-center m-4">
       <b className="text-xl font-sans shadow-sm p-1 text-red-500">
@@ -21,15 +23,13 @@ export function MenuButton() {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" className="icon shadow w-10 h-10 p-0">
-            <MenuIcon />
+            {session?.user?.image && <img src={session?.user?.image} alt="" />}
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
           <DropdownMenuLabel>Menu</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <div className="flex flex-col gap-2 m-4">
-            <Button variant="destructive">Sign out</Button>
-          </div>
+          <SignOutButton />
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
