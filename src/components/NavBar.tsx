@@ -8,7 +8,10 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 const muscleGroups = ["Chest", "Legs", "Arms", "Back", "Shoulders"];
 
 export async function NavBar() {
-  const { workouts: allWorkouts } = await getWorkouts();
+  const { workouts: allWorkouts, error } = await getWorkouts();
+
+  if (error) return <p>error occured: {error}</p>;
+
   return (
     <Tabs defaultValue="Chest">
       <ScrollArea className=" whitespace-nowrap rounded-md border">
@@ -24,9 +27,11 @@ export async function NavBar() {
       {muscleGroups.map((muscle, i) => (
         <TabsContent key={i} value={muscle}>
           <WorkoutsSection
-            workouts={allWorkouts.filter(
-              (workout) => workout.muscleGroup === muscle
-            )}
+            workouts={
+              allWorkouts?.filter(
+                (workout) => workout.muscleGroup === muscle
+              ) ?? []
+            }
             heading={muscle}
           />
         </TabsContent>
