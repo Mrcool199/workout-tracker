@@ -20,7 +20,7 @@ import {
   deleteWorkout,
 } from "@/lib/api/workout/mutations";
 import { useRouter } from "next/navigation";
-import { UpdateWorkout, Workout } from "@/lib/db/schema/workout";
+import { Workout } from "@/lib/db/schema/workout";
 import { useState } from "react";
 
 const initialWorkout = {

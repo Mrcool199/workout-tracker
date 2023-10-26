@@ -2,7 +2,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { WorkoutsSection } from "./WorkoutsSection";
 import { getWorkouts } from "@/lib/api/workout/queries";
 import * as React from "react";
-import Image from "next/image";
 
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 

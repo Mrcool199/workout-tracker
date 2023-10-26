@@ -3,7 +3,6 @@
 import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
 import { NewWorkout, insertWorkoutSchema, workouts, workoutIdSchema, WorkoutId, UpdateWorkout } from "@/lib/db/schema/workout";
-import { getServerSession } from "next-auth";
 import { getUserAuth } from "@/lib/auth";
 
 export const createWorkout = async (workout: NewWorkout) => {
