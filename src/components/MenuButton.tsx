@@ -10,15 +10,16 @@ import {
 import { getServerSession } from "next-auth";
 import { authConfig } from "@/lib/auth";
 import { SignOutButton } from "./SignOutButton";
+import { ModeToggle } from "@/components/DarkModeButton";
 
 export async function MenuButton() {
   const session = await getServerSession(authConfig);
 
   return (
     <div className="flex flex-row justify-between items-center m-4">
-      <b className="text-xl font-sans shadow-sm p-1 text-red-500">
-        Workout
-        <span className="text-black">Tracker</span>
+      <b className="text-2xl font-sans shadow-sm ">
+        <span className="text-red-700">Workout</span>
+        Tracker
       </b>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -27,7 +28,14 @@ export async function MenuButton() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">
-          <DropdownMenuLabel>Menu</DropdownMenuLabel>
+          <div className="flex flex-row justify-between items-center">
+            <DropdownMenuLabel className="pl-4 justify-center">
+              Menu
+            </DropdownMenuLabel>
+            <div className="justify-center">
+              <ModeToggle />
+            </div>
+          </div>
           <DropdownMenuSeparator />
           <SignOutButton />
         </DropdownMenuContent>
