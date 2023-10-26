@@ -23,7 +23,7 @@ export async function MenuButton() {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" className="icon shadow w-10 h-10 p-0">
-            {session?.user?.image && <img src={session?.user?.image} alt="" />}
+            <img src={session?.user?.image ?? ""} alt="" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56">

@@ -11,7 +11,7 @@ const muscleGroups = ["Chest", "Legs", "Arms", "Back", "Shoulders"];
 export async function NavBar() {
   const { workouts: allWorkouts } = await getWorkouts();
   return (
-    <Tabs defaultValue="chest">
+    <Tabs defaultValue="Chest">
       <ScrollArea className=" whitespace-nowrap rounded-md border">
         <TabsList className=" justify-between shadow p-2 w-full">
           {muscleGroups.map((muscle, i) => (

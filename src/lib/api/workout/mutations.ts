@@ -3,8 +3,14 @@
 import { db } from "@/lib/db";
 import { eq } from "drizzle-orm";
 import { NewWorkout, insertWorkoutSchema, workouts, workoutIdSchema, WorkoutId, UpdateWorkout } from "@/lib/db/schema/workout";
+import { getServerSession } from "next-auth";
+import { getUserAuth } from "@/lib/auth";
 
 export const createWorkout = async (workout: NewWorkout) => {
+  const {session} = await getUserAuth()
+  if(!session){
+    return {error:"not logged in"}
+  }
   const newWorkout = insertWorkoutSchema.parse(workout);
   try {
     const [c] =  await db.insert(workouts).values({
@@ -12,7 +18,8 @@ export const createWorkout = async (workout: NewWorkout) => {
       firstDescription: workout.firstDescription,
       lastWorkout: workout.firstWorkout,
       lastDescription: workout.firstDescription,
-      muscleGroup: workout.muscleGroup
+      muscleGroup: workout.muscleGroup,
+      userId: session.user.id
     }).returning();
     return { workout: c }
   } catch (err) {
