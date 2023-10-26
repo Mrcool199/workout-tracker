@@ -44,6 +44,8 @@ export function WorkoutsSection({
     description: string;
   }>(initialWorkout);
 
+  const [errorMessage, setErrorMessage] = useState("");
+
   async function handleDelete(id: Workout["id"]) {
     const result = await deleteWorkout(id);
     if (result.error) {
@@ -52,7 +54,7 @@ export function WorkoutsSection({
     }
 
     refreshPage();
-    setIsOpen(false);
+    handleClose();
   }
 
   function handleAddWorkout() {
@@ -69,7 +71,20 @@ export function WorkoutsSection({
     setIsOpen(true);
   }
 
+  function handleClose() {
+    setIsOpen(false);
+    setErrorMessage("");
+  }
+
   async function handleSaveChanges() {
+    if (
+      dialogWorkout.workout.length === 0 ||
+      dialogWorkout.description.length === 0
+    ) {
+      setErrorMessage("Please enter exercise or description");
+      return;
+    }
+
     if (dialogWorkout.id === initialWorkout.id) {
       const { error } = await createWorkout({
         firstWorkout: dialogWorkout.workout,
@@ -96,13 +111,15 @@ export function WorkoutsSection({
 
       refreshPage();
     }
-
-    setIsOpen(false);
+    handleClose();
   }
 
   return (
     <div className="flex flex-col justify-between gap-2">
-      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <Dialog
+        open={isOpen}
+        onOpenChange={(value) => (value ? setIsOpen(value) : handleClose())}
+      >
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>
@@ -116,11 +133,14 @@ export function WorkoutsSection({
             </DialogDescription>
           </DialogHeader>
 
+          {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+
           <div className="flex flex-col gap-4">
             <Label htmlFor="name" className="text-left">
               Exercise:
             </Label>
             <Input
+              required
               placeholder="New Exercise"
               className="col-span-3 "
               value={dialogWorkout.workout}
@@ -132,6 +152,7 @@ export function WorkoutsSection({
               Description:
             </Label>
             <Textarea
+              required
               placeholder="Add description ..."
               value={dialogWorkout.description}
               onChange={(e) =>
