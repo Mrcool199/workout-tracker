@@ -7,7 +7,7 @@ export default async function Home() {
 
   return (
     <div>
-      <MenuButton />
+      <MenuButton hidden="/group" buttonName="Friends" />
       <NavBar />
     </div>
   );

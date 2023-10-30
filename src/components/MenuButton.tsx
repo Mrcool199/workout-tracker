@@ -13,7 +13,13 @@ import { SignOutButton } from "./SignOutButton";
 import { ModeToggle } from "@/components/DarkModeButton";
 import { ChatRoom } from "./ChatRoom";
 
-export async function MenuButton() {
+export async function MenuButton({
+  hidden,
+  buttonName,
+}: {
+  hidden: string;
+  buttonName: string;
+}) {
   const session = await getServerSession(authConfig);
 
   return (
@@ -38,7 +44,7 @@ export async function MenuButton() {
             </div>
           </div>
           <DropdownMenuSeparator />
-          <ChatRoom />
+          <ChatRoom hide={hidden} buttonName={buttonName} />
           <SignOutButton />
         </DropdownMenuContent>
       </DropdownMenu>
