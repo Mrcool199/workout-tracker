@@ -22,6 +22,11 @@ export const getWorkoutById = async (id: WorkoutId) => {
   return { workout: c };
 };
 
+export const getUsers = async () => {
+  const usersData = await db.select().from(users);
+  return usersData;
+};
+
 export const getUserById = async (userId: string) => {
   // Assuming you have a field "id" in your user schema
   const [user] = await db.select().from(users).where(eq(users.id, userId));
