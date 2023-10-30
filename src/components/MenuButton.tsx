@@ -11,6 +11,7 @@ import { getServerSession } from "next-auth";
 import { authConfig } from "@/lib/auth";
 import { SignOutButton } from "./SignOutButton";
 import { ModeToggle } from "@/components/DarkModeButton";
+import { ChatRoom } from "./ChatRoom";
 
 export async function MenuButton() {
   const session = await getServerSession(authConfig);
@@ -37,6 +38,7 @@ export async function MenuButton() {
             </div>
           </div>
           <DropdownMenuSeparator />
+          <ChatRoom />
           <SignOutButton />
         </DropdownMenuContent>
       </DropdownMenu>
