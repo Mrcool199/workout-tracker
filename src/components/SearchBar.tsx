@@ -2,6 +2,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { SwordsIcon } from "lucide-react";
 import { getUsers } from "@/lib/api/workout/queries";
+import { ProfileDialog } from "./ProfileDialog";
 
 export async function SearchBar() {
   let users = null;
@@ -24,17 +25,7 @@ export async function SearchBar() {
         <div className="flex flex-col p-4">
           {Array.isArray(users) ? (
             users.map((user: any) => (
-              <Button
-                key={user.id}
-                variant="secondary"
-                className="justify-between border-b-2 my-2"
-              >
-                <Button variant="outline" className="icon shadow w-8 h-8 p-0">
-                  <img src={user?.image ?? ""} alt="" />
-                </Button>
-                <span>{user?.name}</span>
-                <SwordsIcon />
-              </Button>
+              <ProfileDialog key={user.id} users={user} />
             ))
           ) : (
             <Button
