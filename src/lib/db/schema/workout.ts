@@ -10,7 +10,8 @@ export const workouts = sqliteTable("workout", {
   lastWorkout: text("lastWorkout").notNull(),
   lastDescription: text("lastDescription").notNull(),
   muscleGroup: text("muscleGroup").notNull(),
-  userId: text("userId").notNull().references(() => users.id)
+  userId: text("userId").notNull().references(() => users.id),
+  firstDate: text("date").notNull()
 });
 
 // Schema for CRUD - used to validate API requests
@@ -18,7 +19,7 @@ export const insertWorkoutSchema = createInsertSchema(workouts).omit({
   lastDescription: true, 
   lastWorkout: true,
   id: true,
-  userId: true
+  userId: true,
 });
 
 export const updateWorkoutSchema = z.object({

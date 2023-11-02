@@ -17,7 +17,10 @@ export function PopUp({ workout }: { workout: Workout }) {
       <PopoverContent className="w-80">
         <div className="grid gap-4">
           <div className="space-y-2">
-            <h4 className="font-medium leading-none">First Entry :</h4>
+            <div className="flex flex-row justify-between">
+              <h4 className="font-medium leading-none">First Entry :</h4>
+              <p className="text-xs text-gray-500">{workout.firstDate}</p>
+            </div>
             <p className="text-sm text-muted-foreground">
               Well done you have come far !
             </p>

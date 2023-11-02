@@ -26,6 +26,7 @@ import { useState } from "react";
 const initialWorkout = {
   description: "",
   workout: "",
+  date: "",
   id: -1,
 } as const;
 
@@ -42,6 +43,7 @@ export function WorkoutsSection({
     id: Workout["id"];
     workout: string;
     description: string;
+    date: string;
   }>(initialWorkout);
 
   const [errorMessage, setErrorMessage] = useState("");
@@ -66,6 +68,7 @@ export function WorkoutsSection({
     setDialogWorkout({
       workout: workout.lastWorkout,
       description: workout.lastDescription,
+      date: workout.firstDate,
       id: workout.id,
     });
     setIsOpen(true);
@@ -86,9 +89,13 @@ export function WorkoutsSection({
     }
 
     if (dialogWorkout.id === initialWorkout.id) {
+      const currentDate = new Date();
+      const formattedDate = currentDate.toISOString().slice(0, 10); // Format as 'YYYY-MM-DD'
+
       const { error } = await createWorkout({
         firstWorkout: dialogWorkout.workout,
         firstDescription: dialogWorkout.description,
+        firstDate: formattedDate,
         muscleGroup: heading,
       });
 

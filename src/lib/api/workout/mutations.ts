@@ -18,7 +18,8 @@ export const createWorkout = async (workout: NewWorkout) => {
       lastWorkout: workout.firstWorkout,
       lastDescription: workout.firstDescription,
       muscleGroup: workout.muscleGroup,
-      userId: session.user.id
+      userId: session.user.id,
+      firstDate: workout.firstDate
     }).returning();
     return { workout: c }
   } catch (err) {
