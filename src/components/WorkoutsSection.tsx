@@ -33,9 +33,11 @@ const initialWorkout = {
 export function WorkoutsSection({
   workouts,
   heading,
+  disabled,
 }: {
   workouts: Workout[];
   heading: string;
+  disabled: boolean;
 }) {
   const { refresh: refreshPage } = useRouter();
   const [isOpen, setIsOpen] = useState(false);
@@ -176,6 +178,7 @@ export function WorkoutsSection({
               onClick={handleSaveChanges}
               type="submit"
               className="w-full"
+              disabled={disabled}
             >
               Save changes
             </Button>
@@ -185,6 +188,7 @@ export function WorkoutsSection({
                 onClick={() => handleDelete(dialogWorkout.id)}
                 variant="destructive"
                 className="w-full"
+                disabled={disabled}
               >
                 Delete Workout
               </Button>
@@ -196,7 +200,12 @@ export function WorkoutsSection({
       <div className="flex flex-row justify-between items-center mx-4">
         <b className="text-lg shadow-sm">{heading}</b>
 
-        <Button onClick={handleAddWorkout} variant="ghost" size="icon">
+        <Button
+          onClick={handleAddWorkout}
+          variant="ghost"
+          size="icon"
+          disabled={disabled}
+        >
           <Plus className="h-6 w-6" />
         </Button>
       </div>

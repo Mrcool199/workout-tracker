@@ -16,7 +16,7 @@ export function WorkoutDialog({ workout, editWorkout }: WorkoutDialogProps) {
       <Button
         onClick={editWorkout}
         variant="secondary"
-        className="justify-between border-b-2 mx-2"
+        className="justify-between border-b-2 mx-2 text-black"
       >
         <span>{workout.lastWorkout}</span>
         <Edit3Icon />

@@ -6,9 +6,15 @@ import * as React from "react";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Workout } from "@/lib/db/schema/workout";
 
-const muscleGroups = ["Chest", "Legs", "Arms", "Back", "Shoulders"];
+const muscleGroups = ["Chest", "Legs", "Arms", "Back", "Shoulders", "Cardio"];
 
-export async function NavBar({ workouts }: { workouts: Workout[] }) {
+export async function NavBar({
+  workouts,
+  disable,
+}: {
+  workouts: Workout[];
+  disable: boolean;
+}) {
   return (
     <Tabs defaultValue="Chest">
       <ScrollArea className=" whitespace-nowrap rounded-md border">
@@ -28,6 +34,7 @@ export async function NavBar({ workouts }: { workouts: Workout[] }) {
               workouts.filter((workout) => workout.muscleGroup === muscle) ?? []
             }
             heading={muscle}
+            disabled={disable}
           />
         </TabsContent>
       ))}
