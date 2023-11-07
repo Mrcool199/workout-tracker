@@ -132,12 +132,14 @@ export function WorkoutsSection({
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>
-              {dialogWorkout.id === initialWorkout.id
+              {disabled
+                ? "Latest Entry :"
+                : dialogWorkout.id === initialWorkout.id
                 ? "Add Exercise"
                 : "Edit Workout"}
             </DialogTitle>
 
-            <DialogDescription>
+            <DialogDescription hidden={disabled}>
               Click save when you&apos;re done.
             </DialogDescription>
           </DialogHeader>
@@ -156,6 +158,7 @@ export function WorkoutsSection({
               onChange={(e) =>
                 setDialogWorkout({ ...dialogWorkout, workout: e.target.value })
               }
+              disabled={disabled}
             />
             <Label htmlFor="username" className="text-left">
               Description:
@@ -170,6 +173,7 @@ export function WorkoutsSection({
                   description: e.target.value,
                 })
               }
+              disabled={disabled}
             />
           </div>
 

@@ -1,5 +1,6 @@
-import { MenuButton } from "@/components/MenuButton";
 import { NavBar } from "@/components/NavBar";
+import { MenuButton } from "@/components/MenuButton";
+import { loginIsRequiredServer } from "@/lib/auth";
 import { getWorkouts } from "@/lib/api/workout/queries";
 
 export default async function User({
@@ -7,7 +8,9 @@ export default async function User({
 }: {
   params: { id: string };
 }) {
+  await loginIsRequiredServer();
   const { error, workouts } = await getWorkouts(id);
+
   const disabled = true;
   return (
     <div>
