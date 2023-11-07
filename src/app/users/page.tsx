@@ -7,7 +7,7 @@ export default async function group() {
 
   return (
     <div>
-      <MenuButton hidden="/" buttonName="Home" />
+      <MenuButton user="" hidden="/" buttonName="Home" />
       <SearchBar />
     </div>
   );

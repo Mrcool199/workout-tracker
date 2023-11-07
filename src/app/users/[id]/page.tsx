@@ -1,7 +1,7 @@
 import { NavBar } from "@/components/NavBar";
 import { MenuButton } from "@/components/MenuButton";
 import { loginIsRequiredServer } from "@/lib/auth";
-import { getWorkouts } from "@/lib/api/workout/queries";
+import { getUserById, getUsers, getWorkouts } from "@/lib/api/workout/queries";
 
 export default async function User({
   params: { id },
@@ -10,11 +10,11 @@ export default async function User({
 }) {
   await loginIsRequiredServer();
   const { error, workouts } = await getWorkouts(id);
-
+  const user = await getUserById(id);
   const disabled = true;
   return (
     <div>
-      <MenuButton hidden="/users" buttonName="Friends" />
+      <MenuButton user={user} hidden="/" buttonName="Home" />
 
       {error ? (
         `error:${error}`

@@ -9,7 +9,7 @@ export default async function Home() {
   const disabled = false;
   return (
     <div>
-      <MenuButton hidden="/users" buttonName="Friends" />
+      <MenuButton user="" hidden="/users" buttonName="Friends" />
 
       {error ? (
         `error:${error}`

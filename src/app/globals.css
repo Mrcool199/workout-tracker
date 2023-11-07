@@ -74,3 +74,21 @@
     @apply bg-background text-foreground;
   }
 }
+
+.diagonal-button {
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.diagonal-button img {
+  position: absolute;
+  object-fit: cover;
+  clip-path: polygon(0% 0%, 100% 0%, 0% 100%);
+}
+
+.diagonal-button img:nth-child(2) {
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
