@@ -6,13 +6,7 @@ import { SwordsIcon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 
-export function SearchBar({
-  usersGot,
-  loggedInUser,
-}: {
-  usersGot: any;
-  loggedInUser: any;
-}) {
+export function SearchBar({ usersGot }: { usersGot: any }) {
   const [users] = useState(usersGot);
   const [searchTerm, setSearchTerm] = useState("");
 
@@ -25,10 +19,8 @@ export function SearchBar({
       return null;
     }
 
-    const filteredUsers = users.filter(
-      (user) =>
-        user.name?.toLowerCase().includes(searchTerm.toLowerCase()) &&
-        user.email?.toLowerCase() !== loggedInUser
+    const filteredUsers = users.filter((user) =>
+      user.name?.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
     return filteredUsers.map((user) => (
