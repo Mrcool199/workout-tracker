@@ -28,7 +28,7 @@ export function SearchBar({ usersGot }: { usersGot: any }) {
         asChild
         key={user.id}
         variant="secondary"
-        className="justify-between border-b-2 my-2 w-full"
+        className="justify-between border-b-2 my-2 w-full max-w-lg mx-auto"
       >
         <Link href={`/users/${user.id}`} key={user.id}>
           <div className="icon shadow w-8 h-8 p-0">
@@ -43,11 +43,11 @@ export function SearchBar({ usersGot }: { usersGot: any }) {
 
   return (
     <>
-      <div className="px-4 flex flex-row items-baseline">
+      <div className="px-4 flex flex-row items-baseline max-w-lg mx-auto">
         <div className="flex flex-row items-baseline p-2">
           <b className="text-lg shadow-sm pr-6">Friends:</b>
         </div>
-        <div className="w-full relative">
+        <div className="w-full relative ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="absolute top-0 bottom-0 w-6 h-6 my-auto text-gray-500 left-3"
@@ -66,7 +66,7 @@ export function SearchBar({ usersGot }: { usersGot: any }) {
             onChange={handleInputChange}
             type="text"
             placeholder="Search"
-            className="pl-12 pr-4"
+            className="pl-12 pr-4 "
           />
         </div>
       </div>
