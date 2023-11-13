@@ -5,7 +5,7 @@ import * as React from "react";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Workout } from "@/lib/db/schema/workout";
 
-const muscleGroups = ["Chest", "Legs", "Arms", "Back", "Shoulders", "Cardio"];
+const muscleGroups = ["Chest", "Legs", "Arms", "Back", "Shoulders", "Other"];
 
 export async function NavBar({
   workouts,
