@@ -4,8 +4,9 @@ import { env } from "@/lib/env.mjs";
 export default {
   schema: "./src/lib/db/schema",
   out: "./src/lib/db/migrations",
-  driver: "better-sqlite",
+  driver: "turso",
   dbCredentials: {
     url: env.DATABASE_URL,
-  }
+    authToken: process.env.DATABASE_AUTH_TOKEN,
+  },
 } satisfies Config;

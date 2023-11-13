@@ -12,6 +12,7 @@ import { authConfig } from "@/lib/auth";
 import { SignOutButton } from "./SignOutButton";
 import { ModeToggle } from "@/components/DarkModeButton";
 import { ChatRoom } from "./ChatRoom";
+import Link from "next/link";
 
 export async function MenuButton({
   hidden,
@@ -48,12 +49,12 @@ export async function MenuButton({
           </DropdownMenuContent>
         </DropdownMenu>
       ) : null}
-      <a href="/">
+      <Link href="/">
         <b className="text-2xl font-sans shadow-sm ">
           <span className="text-red-700">Workout</span>
           Tracker
         </b>
-      </a>
+      </Link>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" className="icon w-10 h-10 p-0 shadow-md">
