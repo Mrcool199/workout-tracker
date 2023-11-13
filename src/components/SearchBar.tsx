@@ -3,6 +3,7 @@
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { SwordsIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
@@ -40,7 +41,12 @@ export function SearchBar({
       >
         <Link href={`/users/${user.id}`} key={user.id}>
           <div className="icon shadow w-8 h-8 p-0">
-            <img src={user?.image ?? ""} alt="" />
+            <Image
+              src={user?.image ?? ""}
+              alt=""
+              width={"100"}
+              height={"100"}
+            />
           </div>
           <span>{user?.name}</span>
           <SwordsIcon />
