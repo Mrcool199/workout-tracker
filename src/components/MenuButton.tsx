@@ -13,6 +13,7 @@ import { SignOutButton } from "./SignOutButton";
 import { ModeToggle } from "@/components/DarkModeButton";
 import { ChatRoom } from "./ChatRoom";
 import Link from "next/link";
+import Image from "next/image";
 
 export async function MenuButton({
   hidden,
@@ -31,7 +32,13 @@ export async function MenuButton({
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="icon shadow-md w-10 h-10 p-0 ">
-              <img className="rounded-lg" src={user?.image ?? ""} alt="" />
+              <Image
+                className="rounded-lg"
+                src={user?.image ?? ""}
+                alt=""
+                width={"100"}
+                height={"100"}
+              />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
@@ -58,10 +65,12 @@ export async function MenuButton({
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="outline" className="icon w-10 h-10 p-0 shadow-md">
-            <img
+            <Image
               className="rounded-lg"
               src={session?.user?.image ?? ""}
               alt=""
+              width={"100"}
+              height={"100"}
             />
           </Button>
         </DropdownMenuTrigger>

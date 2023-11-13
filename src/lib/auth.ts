@@ -17,7 +17,6 @@ declare module "next-auth" {
 }
 
 export const authConfig: NextAuthOptions = {
-  debug: true,
   adapter: {
     // @ts-expect-error
     ...DrizzleAdapter(db),

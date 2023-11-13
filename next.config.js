@@ -2,7 +2,14 @@
 const nextConfig = { 
   experimental:{
     serverActions:true
+  },
+  images: {
+    domains: [
+      "avatars.githubusercontent.com"
+    ]
   }
 }
 
-module.exports = nextConfig
+ module.exports = nextConfig
+
+
