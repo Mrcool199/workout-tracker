@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { Button } from "./ui/button";
 
 export function ChatRoom({
@@ -10,11 +11,11 @@ export function ChatRoom({
 }) {
   return (
     <div className="flex flex-col gap-2 m-4">
-      <a href={hide}>
+      <Link href={hide}>
         <Button className="w-full" role="link">
           {buttonName}
         </Button>
-      </a>
+      </Link>
     </div>
   );
 }
