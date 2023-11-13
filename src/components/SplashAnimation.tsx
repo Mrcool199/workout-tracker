@@ -2,11 +2,24 @@
 
 import { motion } from "framer-motion";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function SplashAnimation() {
   const auth = useSession();
   const [isOpen, setIsOpen] = useState(true);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsOpen(false);
+    }, 1000);
+
+    // Clear the timeout when the component is unmounted or when isOpen becomes false
+    return () => clearTimeout(timeout);
+  }, [isOpen]);
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
 
   if (!isOpen) {
     return null;
@@ -14,32 +27,26 @@ export function SplashAnimation() {
 
   return (
     <div
-      onClick={() => {
-        setIsOpen(false);
-      }}
-      className="absolute backdrop-blur z-10 inset-0 grid place-content-center"
+      onClick={handleClose}
+      className="absolute bg-black z-10 inset-0 flex items-center justify-center "
     >
-      <div>
-        <span className="text-transparent relative">
-          <motion.span
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className="text-black absolute"
-          >
-            Workout
-          </motion.span>
+      <div className="text-transparent relative text-4xl font-bold">
+        <motion.span
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="text-red-700 absolute text-4xl font-bold "
+        >
           Workout
-        </span>
-        <span className="text-transparent relative">
-          <motion.span
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className="text-black absolute"
-          >
-            Tracker
-          </motion.span>
+        </motion.span>
+        Workout
+        <motion.span
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="text-white absolute text-4xl font-bold "
+        >
           Tracker
-        </span>
+        </motion.span>
+        Tracker
       </div>
     </div>
   );
