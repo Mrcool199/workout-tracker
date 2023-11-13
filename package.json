@@ -36,6 +36,7 @@
     "drizzle-zod": "^0.5.1",
     "firebase": "^10.5.0",
     "firebaseui": "^6.1.0",
+    "framer-motion": "^10.16.4",
     "lucide-react": "^0.284.0",
     "next": "13.5.5-canary.4",
     "next-auth": "^4.24.3",
