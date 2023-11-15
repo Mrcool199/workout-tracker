@@ -51,7 +51,7 @@ export async function MenuButton({
               </div>
             </div>
             <DropdownMenuSeparator />
-            <ChatRoom hide="/api/auth/signin/users" buttonName="Friends" />
+            <ChatRoom hide="/users" buttonName="Friends" />
             <SignOutButton />
           </DropdownMenuContent>
         </DropdownMenu>
