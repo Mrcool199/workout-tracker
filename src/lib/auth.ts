@@ -7,6 +7,7 @@ import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import { db } from "./db";
 import { and, eq } from "drizzle-orm";
 import { accounts, users } from "@/lib/db/schema/auth";
+import { env } from "./env.mjs";
 
 declare module "next-auth" {
   interface Session {
@@ -56,15 +57,13 @@ export const authConfig: NextAuthOptions = {
 
 export async function loginIsRequiredServer() {
   const session = await getServerSession(authConfig);
-  if (!session)
-    return redirect("https://workout-gym-tracker.vercel.app/api/auth/signin");
+  if (!session) return redirect(env.NEXTAUTH_URL + "/api/auth/signin");
 }
 
 export function useLoginIsRequiredClient() {
   const session = useSession();
   const router = useRouter();
-  if (!session)
-    router.push("https://workout-gym-tracker.vercel.app/api/auth/signin");
+  if (!session) router.push(env.NEXTAUTH_URL + "/api/auth/signin");
 }
 
 export async function getUserAuth() {
