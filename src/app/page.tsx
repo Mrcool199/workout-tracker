@@ -9,11 +9,7 @@ export default async function Home() {
   const disabled = false;
   return (
     <div>
-      <MenuButton
-        user=""
-        hidden="https://workout-gym-tracker.vercel.app/api/auth/signin/users"
-        buttonName="Friends"
-      />
+      <MenuButton user="" hidden="/users" buttonName="Friends" />
 
       {error ? (
         `error:${error}`
