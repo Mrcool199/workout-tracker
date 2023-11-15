@@ -58,7 +58,7 @@ export async function loginIsRequiredServer() {
   const session = await getServerSession(authConfig);
   if (!session)
     return redirect(
-      "http://workout-tracker-1ctd68msk-mathews-projects-ece12da2.vercel.app/api/auth/signin"
+      "https://workout-tracker-1ctd68msk-mathews-projects-ece12da2.vercel.app/api/auth/signin"
     );
 }
 
@@ -67,7 +67,7 @@ export function useLoginIsRequiredClient() {
   const router = useRouter();
   if (!session)
     router.push(
-      "http://workout-tracker-1ctd68msk-mathews-projects-ece12da2.vercel.app/api/auth/signin"
+      "https://workout-tracker-1ctd68msk-mathews-projects-ece12da2.vercel.app/api/auth/signin"
     );
 }
 
