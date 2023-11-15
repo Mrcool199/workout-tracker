@@ -14,7 +14,11 @@ export default async function User({
   const disabled = true;
   return (
     <div>
-      <MenuButton user={user} hidden="/" buttonName="Home" />
+      <MenuButton
+        user={user}
+        hidden="https://workout-tracker-mjens3ubz-mathews-projects-ece12da2.vercel.app"
+        buttonName="Home"
+      />
 
       {error ? (
         `error:${error}`
