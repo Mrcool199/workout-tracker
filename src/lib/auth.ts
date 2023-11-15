@@ -56,13 +56,19 @@ export const authConfig: NextAuthOptions = {
 
 export async function loginIsRequiredServer() {
   const session = await getServerSession(authConfig);
-  if (!session) return redirect("http://localhost:3000/api/auth/signin");
+  if (!session)
+    return redirect(
+      "http://workout-tracker-1ctd68msk-mathews-projects-ece12da2.vercel.app/api/auth/signin"
+    );
 }
 
 export function useLoginIsRequiredClient() {
   const session = useSession();
   const router = useRouter();
-  if (!session) router.push("http://localhost:3000/api/auth/signin");
+  if (!session)
+    router.push(
+      "http://workout-tracker-1ctd68msk-mathews-projects-ece12da2.vercel.app/api/auth/signin"
+    );
 }
 
 export async function getUserAuth() {
