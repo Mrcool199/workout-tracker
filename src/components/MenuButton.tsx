@@ -52,14 +52,14 @@ export async function MenuButton({
             </div>
             <DropdownMenuSeparator />
             <ChatRoom
-              hide="https://workout-tracker-mjens3ubz-mathews-projects-ece12da2.vercel.app/api/auth/signin/users"
+              hide="https://workout-gym-tracker.vercel.app/api/auth/signin/users"
               buttonName="Friends"
             />
             <SignOutButton />
           </DropdownMenuContent>
         </DropdownMenu>
       ) : null}
-      <Link href="https://workout-tracker-mjens3ubz-mathews-projects-ece12da2.vercel.app">
+      <Link href="https://workout-gym-tracker.vercel.app">
         <b className="text-2xl font-sans shadow-sm ">
           <span className="text-red-700">Workout</span>
           Tracker

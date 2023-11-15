@@ -18,7 +18,7 @@ export default async function group() {
     <div>
       <MenuButton
         user=""
-        hidden="https://workout-tracker-mjens3ubz-mathews-projects-ece12da2.vercel.app"
+        hidden="https://workout-gym-tracker.vercel.app"
         buttonName="Home"
       />
       <SearchBar loggedInUser={loggedInUser} usersGot={users} />

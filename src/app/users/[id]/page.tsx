@@ -16,7 +16,7 @@ export default async function User({
     <div>
       <MenuButton
         user={user}
-        hidden="https://workout-tracker-mjens3ubz-mathews-projects-ece12da2.vercel.app"
+        hidden="https://workout-gym-tracker.vercel.app"
         buttonName="Home"
       />
 

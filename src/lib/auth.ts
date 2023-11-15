@@ -57,18 +57,14 @@ export const authConfig: NextAuthOptions = {
 export async function loginIsRequiredServer() {
   const session = await getServerSession(authConfig);
   if (!session)
-    return redirect(
-      "https://workout-tracker-mjens3ubz-mathews-projects-ece12da2.vercel.app/api/auth/signin"
-    );
+    return redirect("https://workout-gym-tracker.vercel.app/api/auth/signin");
 }
 
 export function useLoginIsRequiredClient() {
   const session = useSession();
   const router = useRouter();
   if (!session)
-    router.push(
-      "https://workout-tracker-mjens3ubz-mathews-projects-ece12da2.vercel.app/api/auth/signin"
-    );
+    router.push("https://workout-gym-tracker.vercel.app/api/auth/signin");
 }
 
 export async function getUserAuth() {
