@@ -1,7 +1,7 @@
 import { NavBar } from "@/components/NavBar";
 import { MenuButton } from "@/components/MenuButton";
 import { loginIsRequiredServer } from "@/lib/auth";
-import { getUserById, getWorkouts } from "@/lib/api/workout/queries";
+import { getUserById, getUsers, getWorkouts } from "@/lib/api/workout/queries";
 
 export default async function User({
   params: { id },
